@@ -136,7 +136,3 @@ stop_time_btn = Button(root, text='Stop Time', command=stop_clock, bg='#f6ff00',
 stop_time_btn.grid(column=6, row=1)
 
 root.mainloop()
-
-#totalmente funcional // falta revision de bugs//
-#optimizar codigo del main, realizar correciones de documentacion.
-#08:54 18/04/2021
