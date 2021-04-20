@@ -510,7 +510,4 @@ if __name__ == '__main__':
 
     else:
         make_scramble(txt_input, True)
-
-#ddocumentar mejor
-
-#906:05 18/04/2021
+        
