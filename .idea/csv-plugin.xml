@@ -3,21 +3,7 @@
   <component name="CsvFileAttributes">
     <option name="attributeMap">
       <map>
-        <entry key="\media\reset.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="\rubikpy\Final Rubik Cube.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="\tests\Final Rubik Cube.csv">
+        <entry key="\output\Final Rubik Cube.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
@@ -59,21 +45,7 @@
             </Attribute>
           </value>
         </entry>
-        <entry key="\tests\expected_results\expected_test_file_5.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="\tests\expected_test_input.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="\tests\test1.csv">
+        <entry key="\tests\expected_results\expected_test_input.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />

@@ -3,6 +3,7 @@ import csv
 import os
 from PIL import Image as Im
 
+
 class Faces:
 
     def __init__(self, name, colors):
@@ -15,21 +16,23 @@ class Faces:
             print(lists)
         return ''
 
-    def inverted(self, index):
+    @staticmethod
+    def inverted(index):
 
         if index == 0:
             return 2
-
-        if index == 1:
+        elif index == 1:
             return 1
-
-        if index == 2:
+        elif index == 2:
             return 0
+        else:
+            raise ValueError
 
 
 def horizontal_turn(green, red, blue, orange, white, yellow, index, sense):
 
-    #Function for moves like U, U' & D, D'
+    # Function for moves like U, U' & D, D'
+
     temp = []
     if sense == 1:
 
@@ -42,10 +45,10 @@ def horizontal_turn(green, red, blue, orange, white, yellow, index, sense):
         orange.colors[index] = temp.copy()
 
         if index == 0:
-            white.colors = rotatematrix(white.colors, 1).copy()
+            white.colors = rotate_matrix(white.colors, 1).copy()
 
         if index == 2:
-            yellow.colors = rotatematrix(yellow.colors, 0).copy()
+            yellow.colors = rotate_matrix(yellow.colors, 0).copy()
 
     if sense == 0:
 
@@ -58,17 +61,18 @@ def horizontal_turn(green, red, blue, orange, white, yellow, index, sense):
         red.colors[index] = temp.copy()
 
         if index == 0:
-            white.colors = rotatematrix(white.colors, 0).copy()
+            white.colors = rotate_matrix(white.colors, 0).copy()
 
         if index == 2:
-            yellow.colors = rotatematrix(yellow.colors, 1).copy()
+            yellow.colors = rotate_matrix(yellow.colors, 1).copy()
 
     del temp
 
 
 def vertical_turn(green, red, blue, orange, white, yellow, index, sense):
 
-    #Function for moves like L, L' & R, R'
+    # Function for moves like L, L' & R, R'
+
     temp = []
     if sense == 1:
 
@@ -92,10 +96,10 @@ def vertical_turn(green, red, blue, orange, white, yellow, index, sense):
         yellow.colors[2][index] = temp[2]
 
         if index == 0:
-            orange.colors = rotatematrix(orange.colors, 1)
+            orange.colors = rotate_matrix(orange.colors, 1)
 
         if index == 2:
-            red.colors = rotatematrix(red.colors, 0)
+            red.colors = rotate_matrix(red.colors, 0)
 
     if sense == 0:
 
@@ -119,24 +123,25 @@ def vertical_turn(green, red, blue, orange, white, yellow, index, sense):
         white.colors[2][index] = temp[2]
 
         if index == 0:
-            orange.colors = rotatematrix(orange.colors, 0).copy()
+            orange.colors = rotate_matrix(orange.colors, 0).copy()
 
         if index == 2:
-            red.colors = rotatematrix(red.colors, 1).copy()
+            red.colors = rotate_matrix(red.colors, 1).copy()
 
     del temp
 
 
 def frontal_back_turn(green, red, blue, orange, white, yellow, index, sense):
 
-    #Function for moves like F, F' & B, B'
+    # Function for moves like F, F' & B, B'
+
     temp = []
 
     if sense == 1:
 
         if index == 2:
 
-            green.colors = rotatematrix(green.colors, 1)
+            green.colors = rotate_matrix(green.colors, 1)
 
             for item in white.colors[2]:
                 temp.append(item)
@@ -159,7 +164,7 @@ def frontal_back_turn(green, red, blue, orange, white, yellow, index, sense):
 
         if index == 0:
 
-            blue.colors = rotatematrix(blue.colors, 0)
+            blue.colors = rotate_matrix(blue.colors, 0)
 
             for item in white.colors[0]:
                 temp.append(item)
@@ -184,7 +189,7 @@ def frontal_back_turn(green, red, blue, orange, white, yellow, index, sense):
 
         if index == 2:
 
-            green.colors = rotatematrix(green.colors, 0)
+            green.colors = rotate_matrix(green.colors, 0)
 
             for item in white.colors[2]:
                 temp.append(item)
@@ -207,7 +212,7 @@ def frontal_back_turn(green, red, blue, orange, white, yellow, index, sense):
 
         if index == 0:
 
-            blue.colors = rotatematrix(blue.colors, 1)
+            blue.colors = rotate_matrix(blue.colors, 1)
 
             for item in white.colors[0]:
                 temp.append(item)
@@ -231,10 +236,12 @@ def frontal_back_turn(green, red, blue, orange, white, yellow, index, sense):
     del temp
 
 
-def rotatematrix(m, sense):
+def rotate_matrix(m, sense):
+
     matrix = np.array(m)
     if sense == 1:
-        #Clockwise direction
+
+        # Clockwise direction
         return np.rot90(matrix, k=1, axes=(1, 0))
 
     else:
@@ -243,65 +250,71 @@ def rotatematrix(m, sense):
 
 def test(green, red, blue, orange, white, yellow, count):
 
-    #For make tests during the develop, and print each move in terminal
+    # For make tests during the development, and print each move in terminal
 
-    print(f"\n+++++NEXT MOV+++++ {count}\n")
+    print(f"\n+++++NEXT MOVE+++++ {count}\n")
 
-    for ls in green.colors:
-        print(ls)
-    print("\n")
-    for ls in red.colors:
-        print(ls)
-    print("\n")
-    for ls in blue.colors:
-        print(ls)
-    print("\n")
-    for ls in orange.colors:
-        print(ls)
-    print("\n")
+    def print_face(face: Faces):
 
-    for ls in white.colors:
-        print(ls)
-    print("\n")
-    for ls in yellow.colors:
-        print(ls)
-    print("\n")
+        for ls in face.colors:
+            print(ls)
+        print("\n")
+
+    def print_all(*args):
+
+        for face in args:
+            print_face(face)
+
+    print_all(green, red, blue, orange, white, yellow)
 
 
-def makecsv(green, red, blue, orange, white, yellow, filename):
+def make_csv(green, red, blue, orange, white, yellow, filename):
 
-    #Write csv file, for make_img applications and easily implement a auto-solver reading the csv.
+    # Write csv file, for make_img applications and easily implement an auto-solver reading the csv.
 
     with open(filename, mode='w', newline='') as rubik_csv:
-
         colors_writer = csv.writer(rubik_csv, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
         vcm = '      '
-        #Write white face
-        colors_writer.writerow([vcm, vcm, vcm, white.colors[0][0], white.colors[0][1], white.colors[0][2], vcm, vcm, vcm, vcm, vcm, vcm])
-        colors_writer.writerow([vcm, vcm, vcm, white.colors[1][0], white.colors[1][1], white.colors[1][2], vcm, vcm, vcm, vcm, vcm, vcm])
-        colors_writer.writerow([vcm, vcm, vcm, white.colors[2][0], white.colors[2][1], white.colors[2][2], vcm, vcm, vcm, vcm, vcm, vcm])
-        #Write orange, green, red and blue
+
+        # Write white face
+
+        colors_writer.writerow(
+            [vcm, vcm, vcm, white.colors[0][0], white.colors[0][1], white.colors[0][2], vcm, vcm, vcm, vcm, vcm, vcm])
+        colors_writer.writerow(
+            [vcm, vcm, vcm, white.colors[1][0], white.colors[1][1], white.colors[1][2], vcm, vcm, vcm, vcm, vcm, vcm])
+        colors_writer.writerow(
+            [vcm, vcm, vcm, white.colors[2][0], white.colors[2][1], white.colors[2][2], vcm, vcm, vcm, vcm, vcm, vcm])
+
+        # Write orange, green, red and blue
 
         colors_writer.writerow([orange.colors[0][0], orange.colors[0][1], orange.colors[0][2], green.colors[0][0],
-                               green.colors[0][1], green.colors[0][2], red.colors[0][0], red.colors[0][1],
-                               red.colors[0][2], blue.colors[0][0], blue.colors[0][1], blue.colors[0][2]])
+                                green.colors[0][1], green.colors[0][2], red.colors[0][0], red.colors[0][1],
+                                red.colors[0][2], blue.colors[0][0], blue.colors[0][1], blue.colors[0][2]])
         colors_writer.writerow([orange.colors[1][0], orange.colors[1][1], orange.colors[1][2], green.colors[1][0],
-                               green.colors[1][1], green.colors[1][2], red.colors[1][0], red.colors[1][1],
-                               red.colors[1][2], blue.colors[1][0], blue.colors[1][1], blue.colors[1][2]])
+                                green.colors[1][1], green.colors[1][2], red.colors[1][0], red.colors[1][1],
+                                red.colors[1][2], blue.colors[1][0], blue.colors[1][1], blue.colors[1][2]])
         colors_writer.writerow([orange.colors[2][0], orange.colors[2][1], orange.colors[2][2], green.colors[2][0],
-                               green.colors[2][1], green.colors[2][2], red.colors[2][0], red.colors[2][1],
-                               red.colors[2][2], blue.colors[2][0], blue.colors[2][1], blue.colors[2][2]])
+                                green.colors[2][1], green.colors[2][2], red.colors[2][0], red.colors[2][1],
+                                red.colors[2][2], blue.colors[2][0], blue.colors[2][1], blue.colors[2][2]])
 
-        #Write yellow
+        # Write yellow
 
-        colors_writer.writerow([vcm, vcm, vcm, yellow.colors[0][0], yellow.colors[0][1], yellow.colors[0][2], vcm, vcm, vcm, vcm, vcm, vcm])
-        colors_writer.writerow([vcm, vcm, vcm, yellow.colors[1][0], yellow.colors[1][1], yellow.colors[1][2], vcm, vcm, vcm, vcm, vcm, vcm])
-        colors_writer.writerow([vcm, vcm, vcm, yellow.colors[2][0], yellow.colors[2][1], yellow.colors[2][2], vcm, vcm, vcm, vcm, vcm, vcm])
+        colors_writer.writerow(
+            [vcm, vcm, vcm, yellow.colors[0][0], yellow.colors[0][1], yellow.colors[0][2], vcm, vcm, vcm, vcm, vcm,
+             vcm])
+        colors_writer.writerow(
+            [vcm, vcm, vcm, yellow.colors[1][0], yellow.colors[1][1], yellow.colors[1][2], vcm, vcm, vcm, vcm, vcm,
+             vcm])
+        colors_writer.writerow(
+            [vcm, vcm, vcm, yellow.colors[2][0], yellow.colors[2][1], yellow.colors[2][2], vcm, vcm, vcm, vcm, vcm,
+             vcm])
 
 
-def makeimg(csv_colors):
+def make_img(csv_colors):
 
-    colors_index = {'orange': 'Orange Title.jpg', 'green ': 'Green Title.jpg', 'red   ': 'Red Title.jpg', 'blue  ': 'Blue Title.jpg', 'white ': 'White Title.jpg', 'yellow': 'Yellow Title.jpg', '      ': 'Black Title.jpg'}
+    colors_index = {'orange': 'Orange Title.jpg', 'green ': 'Green Title.jpg', 'red   ': 'Red Title.jpg',
+                    'blue  ': 'Blue Title.jpg', 'white ': 'White Title.jpg', 'yellow': 'Yellow Title.jpg',
+                    '      ': 'Black Title.jpg'}
 
     with open(csv_colors, 'r') as csv_file:
 
@@ -317,7 +330,6 @@ def makeimg(csv_colors):
             for item in row:
 
                 if first_open:
-
 
                     img_background = Im.open(os.path.join('..', 'media', 'White Background.jpg'))
                     first_open = False
@@ -339,18 +351,17 @@ def makeimg(csv_colors):
 
 def reset_csv_img():
 
-    #Reset img
+    # Reset img
     clear_img = Im.open(os.path.join('..', 'media', 'Reset_cube.jpg'))
     clear_img.save(os.path.join('..', 'output', '-----Final-----.jpg'))
     clear_img.close()
 
-    #Reset csv
-    clear_csv = open('..//output//Final Rubik Cube.csv', "w+")
+    # Reset csv
+    clear_csv = open('..//output//Final Rubik Cube.csv', "w")
     clear_csv.close()
 
 
-def make_scramble(sc_input='', print_moves=False):
-
+def set_default_faces():
 
     f_up = [["white ", "white ", "white "], ["white ", "white ", "white "], ["white ", "white ", "white "]]
     f_down = [["yellow", "yellow", "yellow"], ["yellow", "yellow", "yellow"], ["yellow", "yellow", "yellow"]]
@@ -366,6 +377,13 @@ def make_scramble(sc_input='', print_moves=False):
     white = Faces('white', f_up)
     yellow = Faces('yellow', f_down)
 
+    return green, red, blue, orange, white, yellow
+
+
+def make_scramble(sc_input='', print_moves=False, gen_img=True):
+
+    reset_csv_img()
+    green, red, blue, orange, white, yellow = set_default_faces()
 
     if type(sc_input) == str:
         each_move = sc_input.split()
@@ -379,7 +397,6 @@ def make_scramble(sc_input='', print_moves=False):
     for ch in each_move:
 
         if ch == "U":
-
             index = 0
             sense = 1
             horizontal_turn(green, red, blue, orange, white, yellow, index, sense)
@@ -390,7 +407,6 @@ def make_scramble(sc_input='', print_moves=False):
             horizontal_turn(green, red, blue, orange, white, yellow, index, sense)
 
         if ch == "U2":
-
             index = 0
             sense = 1
             horizontal_turn(green, red, blue, orange, white, yellow, index, sense)
@@ -429,7 +445,6 @@ def make_scramble(sc_input='', print_moves=False):
             vertical_turn(green, red, blue, orange, white, yellow, index, sense)
 
         if ch == "R":
-
             index = 2
             sense = 0
             vertical_turn(green, red, blue, orange, white, yellow, index, sense)
@@ -440,7 +455,6 @@ def make_scramble(sc_input='', print_moves=False):
             vertical_turn(green, red, blue, orange, white, yellow, index, sense)
 
         if ch == "R2":
-
             index = 2
             sense = 0
             vertical_turn(green, red, blue, orange, white, yellow, index, sense)
@@ -484,34 +498,22 @@ def make_scramble(sc_input='', print_moves=False):
 
     filepath = '..//output//Final Rubik Cube.csv'
 
-    makecsv(green, red, blue, orange, white, yellow, filename=filepath)
-    makeimg(csv_colors=filepath)
+    make_csv(green, red, blue, orange, white, yellow, filename=filepath)
+
+    if gen_img:
+        make_img(csv_colors=filepath)
 
 
 if __name__ == '__main__':
 
-    f_up = [["white ", "white ", "white "], ["white ", "white ", "white "], ["white ", "white ", "white "]]
-    f_down = [["yellow", "yellow", "yellow"], ["yellow", "yellow", "yellow"], ["yellow", "yellow", "yellow"]]
-    f_left = [["orange", "orange", "orange"], ["orange", "orange", "orange"], ["orange", "orange", "orange"]]
-    f_right = [["red   ", "red   ", "red   "], ["red   ", "red   ", "red   "], ["red   ", "red   ", "red   "]]
-    f_front = [["green ", "green ", "green "], ["green ", "green ", "green "], ["green ", "green ", "green "]]
-    f_back = [["blue  ", "blue  ", "blue  "], ["blue  ", "blue  ", "blue  "], ["blue  ", "blue  ", "blue  "]]
+    string_input = input('Insert a scramble: ')
 
-    green = Faces('green', f_front)
-    red = Faces('red', f_right)
-    blue = Faces('blue', f_back)
-    orange = Faces('orange', f_left)
-    white = Faces('white', f_up)
-    yellow = Faces('yellow', f_down)
-
-    txt_input = input('Insert a scramble: ')
-
-    if 'auto' in txt_input:
+    if 'auto' in string_input[:5]:
 
         from scramble_generator import scramble_generator
 
-        strscramble = scramble_generator(int(txt_input[4:]))
-        make_scramble(strscramble, True)
+        str_scramble = scramble_generator(int(string_input[4:]))
+        make_scramble(str_scramble, print_moves=True, gen_img=False)
 
     else:
-        make_scramble(txt_input, True)
+        make_scramble(string_input, print_moves=True, gen_img=False)
