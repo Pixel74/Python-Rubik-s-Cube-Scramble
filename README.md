@@ -17,11 +17,11 @@ The project is currently in development. Things to be added included:
 
 Clone down this repository. The program can run in a GUI or terminal. However, the chronometer and image visualization is limited to the GUI execution.
 
-###GUI:
+### GUI:
 
 1. Navigate to the package folder and execute *app.py*.
 
-###Terminal:
+### Terminal:
 
 The different components of the project can be used independently. Provided proper input/output, you are able to use the following scripts:
 
@@ -74,3 +74,9 @@ I developed this as a side project to practice my Python skills, the original co
 Originally, my plan when revisiting the project was to improve the performance. This included developing tests and benchmark scripts to allow me to properly measure any improvements in performance, as well as updating to a better folder tree. Although the improvement in performance turned out to be not feasible (further explanation below), trying to understand and improve old code, as well as trying to come up with a performance solution, were great experiences overall.
 
 ## Optimization proposal
+
+First of all, after further inspection of the code's behavior with the profiler and benchmark.py, it turns out that the main performance bottleneck (mainly visible in the GUI application) is the make_img() function. I ended up adapting the code and tests to run without calling make_img(). Without a call to make_img(), the tests give a runtime average of 0.04s and 1.7s, rather than the 8s it takes with a call to make_img(). 
+These are rather short amounts of time that do not have an visible effect in the execution if we have a reasonable algorithm length. However, it can be argue that regardless of the usage of a short algorithm, there is room for improvement.
+
+My proposal is to divide the cube, not in titles (a total of 48, if we forget about the center titles, which are fixed) but in blocks. With this approach, only 21 (again, centers are fixed) blocks would be needed to be taken into account for every movement.
+This approach is better in that instead of computing every title on its own, we could compute corner blocks, with each has 3 titles. This would reduce the total number of operations required. 
