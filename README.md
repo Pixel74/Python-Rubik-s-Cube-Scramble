@@ -4,12 +4,13 @@ A basic Rubik's cube scrambler, visualizer and chronometer made in Python. It ca
 ## Project status
 
 The project is currently in development. Things to be added included:
--load_csv function.
--Improvements in GUI.
--Optimization (proposal explained below)
--Support for 2x2 and 4x4 cubes, as well as custom title colors.
--Executable file.
--Requirements file.
+
+- Load_csv function.
+- Improvements in GUI.
+- Optimization (proposal explained below)
+- Support for 2x2 and 4x4 cubes, as well as custom title colors.
+- Executable file.
+- Requirements file.
 
 ## Screenshots
 
