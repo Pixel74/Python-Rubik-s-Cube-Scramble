@@ -80,3 +80,6 @@ These are rather short amounts of time that do not have an visible effect in the
 
 My proposal is to divide the cube, not in titles (a total of 48, if we forget about the center titles, which are fixed) but in blocks. With this approach, only 21 (again, centers are fixed) blocks would be needed to be taken into account for every movement.
 This approach is better in that instead of computing every title on its own, we could compute corner blocks, with each has 3 titles. This would reduce the total number of operations required. 
+
+If we let n be a movement in the scramble. And p be an operation of look-up and movement of any single title t. Then with the current implementation for every n we are performing 20p that gives a linear runtime of O(20n).
+On the other hand, with the proposed implementation, the constant value would be reduced to 8. Although it is a lower number, the runtime O(8n) is still linear. This would indeed reduce the test time from 0.04s to 0.016s. Yet, this is not an improvement I consider worth implementing right now, since it does not provide a real benefit within reasonable user input.
