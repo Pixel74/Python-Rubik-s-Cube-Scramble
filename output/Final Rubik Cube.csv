@@ -1,9 +1,9 @@
-      ,      ,      ,white ,white ,white ,      ,      ,      ,      ,      ,      
-      ,      ,      ,white ,white ,white ,      ,      ,      ,      ,      ,      
-      ,      ,      ,white ,white ,white ,      ,      ,      ,      ,      ,      
-orange,orange,orange,green ,green ,green ,red   ,red   ,red   ,blue  ,blue  ,blue  
-orange,orange,orange,green ,green ,green ,red   ,red   ,red   ,blue  ,blue  ,blue  
-green ,green ,green ,red   ,red   ,red   ,blue  ,blue  ,blue  ,orange,orange,orange
-      ,      ,      ,yellow,yellow,yellow,      ,      ,      ,      ,      ,      
-      ,      ,      ,yellow,yellow,yellow,      ,      ,      ,      ,      ,      
-      ,      ,      ,yellow,yellow,yellow,      ,      ,      ,      ,      ,      
+      ,      ,      ,yellow,green ,yellow,      ,      ,      ,      ,      ,      
+      ,      ,      ,white ,white ,blue  ,      ,      ,      ,      ,      ,      
+      ,      ,      ,white ,yellow,white ,      ,      ,      ,      ,      ,      
+red   ,orange,green ,red   ,red   ,orange,green ,orange,orange,blue  ,white ,blue  
+orange,orange,blue  ,white ,green ,blue  ,yellow,red   ,red   ,green ,blue  ,yellow
+blue  ,yellow,yellow,green ,orange,orange,green ,blue  ,white ,orange,red   ,white 
+      ,      ,      ,red   ,green ,yellow,      ,      ,      ,      ,      ,      
+      ,      ,      ,green ,yellow,red   ,      ,      ,      ,      ,      ,      
+      ,      ,      ,red   ,white ,blue  ,      ,      ,      ,      ,      ,      

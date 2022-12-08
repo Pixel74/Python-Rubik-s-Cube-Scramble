@@ -7,7 +7,7 @@ from scramble_generator import scramble_generator
 
 # Set Window
 root = Tk()
-root.title("Rubik's Cube")
+root.title("rubikpy")
 canvas = Canvas(root, width=900, height=750)
 canvas.grid(columnspan=7, rowspan=12)
 
