@@ -13,6 +13,9 @@ The project is currently in development. Things to be added included:
 
 ## Screenshots
 
+![main_screen screenshot](/assets/main_screen.png "Main screen of the GUI")
+![Example 1 of the program](/assets/example_1.png "A simple scramble")
+
 ## Installation and Setup
 
 Clone down this repository. The program can run in a GUI or terminal. However, the chronometer and image visualization is limited to the GUI execution.
